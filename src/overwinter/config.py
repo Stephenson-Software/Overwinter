@@ -7,7 +7,7 @@ import os
 # design: they are identity and revocation, not secrecy. An empty key leaves
 # the client disabled.
 USAGE_REPORTING_ENDPOINT_DEFAULT = "https://trace.danielstephenson.dev"
-USAGE_REPORTING_KEY_DEFAULT = ""
+USAGE_REPORTING_KEY_DEFAULT = "X0y1cySFi3aCc8_XceZ5i4VXJS4SGGOunoevHWP8wDY"
 
 # Values that switch an OVERWINTER_* boolean off. Anything else - including
 # unset and empty - leaves the default in place, matching OVERWINTER_SAVE_DIR.
