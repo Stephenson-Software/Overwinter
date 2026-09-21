@@ -96,7 +96,9 @@ def test_no_person_or_scene_gates_on_the_day_number():
     paths = [os.path.join(root, "people.py")]
     scenes = os.path.join(root, "scenes")
     paths += [os.path.join(scenes, n) for n in os.listdir(scenes) if n.endswith(".py")]
-    compared = re.compile(r"\.day\b\s*(?:[<>=!]=?|\bin\b)|(?:[<>=!]=?)\s*\w+\.day\b")
+    compared = re.compile(
+        r"\.day\b\s*(?:[<>]=?|[=!]=|\bin\b)|(?:[<>]=?|[=!]=)\s*\w+\.day\b"
+    )
     calendar = re.compile(r"\b(?:PLANE_DAY|ICE_SAFE_DAY|STORM_DAYS|DARK_FLIGHT_DAY)\b")
     for path in paths:
         with open(path) as f:
@@ -108,7 +110,7 @@ def test_no_person_or_scene_gates_on_the_day_number():
 
 def test_every_flag_the_game_sets_is_declared_in_one_place():
     """Every flags.NAME the source writes is listed in flags.ALL, and no
-    string key is written to state.flags directly."""
+    string key is written to - or read from - state.flags directly."""
     root = os.path.join(os.path.dirname(__file__), "..", "src", "overwinter")
     used = set()
     for dirpath, _, filenames in os.walk(root):
