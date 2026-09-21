@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Overwinter save",
+    "type": "object",
+    "required": ["version", "day", "facts"],
+    "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "day": { "type": "integer", "minimum": 1 },
+        "watch": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "location": { "type": "string" },
+        "facts": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "factDays": {
+            "type": "object",
+            "additionalProperties": { "type": "integer", "minimum": 1 }
+        },
+        "unlocked": { "type": "array", "items": { "type": "string" } },
+        "flags": { "type": "object" },
+        "food": { "type": "integer", "minimum": 0 },
+        "akselAt": { "type": "string", "enum": ["hut", "station", "flown", "stayed"] },
+        "akselFood": { "type": "integer", "minimum": 0 },
+        "seals": { "type": "integer", "minimum": 0 },
+        "ending": { "type": ["string", "null"] },
+        "rngDraws": { "type": "integer", "minimum": 0 }
+    }
+}
