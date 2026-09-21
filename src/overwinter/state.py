@@ -11,7 +11,7 @@ and save.
 
 import random
 
-from overwinter import facts
+from overwinter import facts, flags
 
 SAVE_VERSION = 1
 SAVE_FILENAME = "save.json"
@@ -109,7 +109,7 @@ class State:
     @property
     def dailyRations(self):
         """What the store loses at the end of a day."""
-        if self.flags.get("halfRations"):
+        if self.flags.get(flags.HALF_RATIONS):
             return (self.mouths + 1) // 2
         return self.mouths
 
@@ -128,6 +128,12 @@ class State:
     @property
     def iceSafe(self):
         return self.day >= ICE_SAFE_DAY
+
+    @property
+    def stormNightPassed(self):
+        """The first night of the storm - the one the fuel margin decides -
+        has been lived through, one way or the other."""
+        return self.day > STORM_DAYS[0]
 
     @property
     def over(self):

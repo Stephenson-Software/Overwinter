@@ -9,6 +9,7 @@ from overwinter.state import (
     AKSEL_STATION,
     PLANE_DAY,
     START_FOOD,
+    STORM_DAYS,
     State,
     WORLD_SEED,
 )
@@ -77,6 +78,34 @@ def test_each_draw_is_a_function_of_the_seed_and_its_index_only():
     assert WORLD_SEED == 1958
 
 
+def test_the_storm_night_is_a_property_not_a_day_number():
+    state = State()
+    assert not state.stormNightPassed
+    state.day = STORM_DAYS[0]
+    assert state.stormy and not state.stormNightPassed
+    state.day = STORM_DAYS[0] + 1
+    assert state.stormNightPassed
+
+
+def test_no_person_or_scene_gates_on_the_day_number():
+    """What opens a line or a menu row is what you know, a flag, or a
+    state property - never a comparison against the day, and never a
+    calendar constant carried out of state.py. The people and the scenes
+    may still print the day; they may not decide on it."""
+    root = os.path.join(os.path.dirname(__file__), "..", "src", "overwinter")
+    paths = [os.path.join(root, "people.py")]
+    scenes = os.path.join(root, "scenes")
+    paths += [os.path.join(scenes, n) for n in os.listdir(scenes) if n.endswith(".py")]
+    compared = re.compile(r"\.day\b\s*(?:[<>=!]=?|\bin\b)|(?:[<>=!]=?)\s*\w+\.day\b")
+    calendar = re.compile(r"\b(?:PLANE_DAY|ICE_SAFE_DAY|STORM_DAYS|DARK_FLIGHT_DAY)\b")
+    for path in paths:
+        with open(path) as f:
+            source = f.read()
+        name = os.path.relpath(path, root)
+        assert not compared.search(source), (name, compared.search(source).group())
+        assert not calendar.search(source), (name, calendar.search(source).group())
+
+
 def test_every_flag_the_game_sets_is_declared_in_one_place():
     """Every flags.NAME the source writes is listed in flags.ALL, and no
     string key is written to state.flags directly."""
@@ -89,6 +118,7 @@ def test_every_flag_the_game_sets_is_declared_in_one_place():
             with open(os.path.join(dirpath, name)) as f:
                 source = f.read()
             assert 'flags["' not in source and "flags['" not in source, name
+            assert 'flags.get("' not in source and "flags.get('" not in source, name
             used.update(re.findall(r"flags\.([A-Z_]+)\b", source))
             used.update(re.findall(r"state\.flags\[([A-Z_]+)\]", source))
     declared = {name for name in dir(flags) if name.isupper() and name != "ALL"}
