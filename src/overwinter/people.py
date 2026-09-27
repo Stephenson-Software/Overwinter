@@ -27,7 +27,7 @@ from overwinter.flags import (
     TOLD_DOV,
     TOLD_MARIT_ABOUT_TEO,
 )
-from overwinter.state import AKSEL_HUT, AKSEL_STATION, STORM_DAYS
+from overwinter.state import AKSEL_HUT, AKSEL_STATION
 
 
 def marit(game):
@@ -107,7 +107,7 @@ def marit(game):
             state.knows(facts.TEOS_NIGHTS)
             and TOLD_MARIT_ABOUT_TEO not in state.flags
             and COVERED_FOR_TEO not in state.flags
-            and state.day <= STORM_DAYS[0]
+            and not state.stormNightPassed
         )
 
     def aboutTeo():
@@ -393,7 +393,7 @@ def teo(game):
             state.knows(facts.TEOS_NIGHTS)
             and TOLD_MARIT_ABOUT_TEO not in state.flags
             and COVERED_FOR_TEO not in state.flags
-            and state.day <= STORM_DAYS[0]
+            and not state.stormNightPassed
         )
 
     def coverForHim():
@@ -449,7 +449,7 @@ def teo(game):
             {
                 "question": "About the storm night.",
                 "response": afterTheDryNight,
-                "condition": lambda: state.day > STORM_DAYS[0],
+                "condition": lambda: state.stormNightPassed,
             },
         ],
     )
