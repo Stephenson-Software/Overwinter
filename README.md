@@ -1,5 +1,7 @@
 # Overwinter
 
+[![Play in your browser](https://img.shields.io/badge/Play-in%20your%20browser-2ea44f)](https://danielstephenson.dev/play/overwinter)
+
 *Four people, one weather station, twenty days until a plane.*
 
 The plane that brought you to Cape Ferrin left an hour ago and cannot come back until there is light enough to land on. You are the cook; you took the job because nobody else would. The store is in the galley, and the store is your job. Nobody has asked you to count it.
