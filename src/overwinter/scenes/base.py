@@ -1,5 +1,5 @@
 # @author Daniel McCoy Stephenson
-from overwinter import endings, people, winter
+from overwinter import achievements, endings, people, winter
 from overwinter.flags import PLANE_ON_STRIP
 
 STORM_REASON = "the storm - Marit's order is nobody past the door"
@@ -57,6 +57,7 @@ class Scene:
 
     def remember(self, who):
         """The beat after a choice someone will hold you to - for good."""
+        achievements.choiceRemembered()
         self.ui.showDialogue("[%s will remember that.]" % who)
 
     def talk(self, npc):
