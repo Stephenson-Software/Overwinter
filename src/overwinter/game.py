@@ -18,7 +18,14 @@ from tak.saves import (
 )
 from tak.ui import UIType, createUserInterface
 
-from overwinter import endings, premise, progression, scenes, usageReporting
+from overwinter import (
+    achievements,
+    endings,
+    premise,
+    progression,
+    scenes,
+    usageReporting,
+)
 from overwinter.config import Config
 from overwinter.header import buildHeader
 from overwinter.state import SAVE_FILENAME, SCHEMA_PATH, State
@@ -106,6 +113,9 @@ class Overwinter:
                 self.prompt.text = "Day %d. What would you like to do?" % self.state.day
         # A loaded save may predate an unlock, or have earned one since.
         progression.catchUp(self.state)
+        # Arcade achievements the save has already earned (reported, never
+        # written to the save).
+        achievements.catchUp(self.state)
         self.scenes = scenes.build(self)
         # A brand-new game opens on where you are and who is here, once.
         self.showOpening = kind == "new" or (
@@ -115,7 +125,10 @@ class Overwinter:
     # --- the scenes' hooks ------------------------------------------------
     def learn(self, factId):
         """Promote something to knowledge. Returns True if it was new."""
-        return self.state.learn(factId)
+        if not self.state.learn(factId):
+            return False
+        achievements.factLearned(self.state, factId)
+        return True
 
     # --- play -------------------------------------------------------------
     def play(self):
