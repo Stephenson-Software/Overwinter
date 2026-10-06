@@ -17,7 +17,7 @@ state already knows - an achievement is never stored in the save file.
 
 from tak import arcade
 
-from overwinter import facts, flags, people
+from overwinter import facts, people
 
 ACHIEVEMENTS = [
     {
@@ -133,10 +133,7 @@ def catchUp(state):
 
 def _rememberedSomething(state):
     # Flags are never forgotten in Overwinter, so a remembered choice is
-    # still on the state: any of the ones people hold you to, or the last
-    # one on the strip.
-    if flags.BACKED_AKSEL_STAYING in state.flags:
-        return True
+    # still on the state: any of the ones people hold you to.
     return any(flag in state.flags for flag in people.REMEMBERED)
 
 

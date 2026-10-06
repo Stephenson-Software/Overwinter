@@ -116,27 +116,43 @@ def _people(state):
 
 
 def _aksel(state):
+    # Saying five on the strip is the last thing he will remember, and it
+    # undoes "he had his winter" - he did not get the end of it.
+    refused = state.flags.get(flags.BACKED_AKSEL_STAYING) is False
     if state.flags.get(flags.BROUGHT_AKSEL_IN):
-        return (
+        paragraph = (
             "AKSEL. You asked him to come in and he came, with his crates on "
             "the sledge, and ate at the table with the rest of you. Dov "
             "learned what was going on at supper that night, from his face."
         )
-    if state.flags.get(flags.AKSEL_WALKED_IN):
-        return (
+    elif state.flags.get(flags.AKSEL_WALKED_IN):
+        paragraph = (
             "AKSEL. He walked in on his own the night the store ran out, "
             "because he had been counting too. You had not found him. He "
             "found you."
         )
-    if state.flags.get(flags.LEFT_AKSEL_AT_HUT):
-        return (
+    elif state.flags.get(flags.LEFT_AKSEL_AT_HUT):
+        paragraph = (
             "AKSEL. You left him in the hut, as he asked, and walked across "
-            "with what he needed when he needed it. He had his winter."
+            "with what he needed when he needed it."
         )
-    return (
-        "AKSEL. You knew where he was and never said what you wanted of him. "
-        "He had his winter, and you had your count."
-    )
+        if not refused:
+            paragraph += " He had his winter."
+    else:
+        paragraph = (
+            "AKSEL. You knew where he was and never said what you wanted of him."
+        )
+        if not refused:
+            paragraph += " He had his winter, and you had your count."
+    if refused:
+        paragraph += (
+            " On the strip he asked you to say four and let him go back "
+            "across, and you said five. He got on the plane and did not look "
+            "at the bay again. It cost him the hut, the holes and the August "
+            "ship - the last winter he had asked for - and he knows whose "
+            "word took it."
+        )
+    return paragraph
 
 
 def _fiveOut(state):

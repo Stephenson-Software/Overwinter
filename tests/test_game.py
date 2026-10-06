@@ -107,6 +107,7 @@ def test_the_winter_can_be_finished_with_five_on_the_plane(scripted):
     assert flags.GENERATOR_RAN_DRY not in state.flags
     assert state.flags[flags.DEPOT_FETCHED] is True
     assert state.flags[flags.BACKED_AKSEL_STAYING] is False
+    assert ui.saw("On the strip he asked you to say four")
     # The count closed: there was food on the shelf on the last morning.
     assert flags.STORE_EMPTIED_ON not in state.flags
     assert state.food > 0

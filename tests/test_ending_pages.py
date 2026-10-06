@@ -1,7 +1,7 @@
 """The last pages, built straight from a state: every remembered choice gets
 its sentence, and the count says how it closed."""
 
-from overwinter import endings, facts, flags
+from overwinter import endings, facts, flags, people
 from overwinter.state import State
 
 
@@ -82,6 +82,30 @@ def test_aksel_on_the_five_out_page_follows_how_he_came_to_the_table():
     for setFlags, line in cases:
         state = _ended(facts.FIVE_OUT, **setFlags)
         assert len(_starting(state, line)) == 1, setFlags
+
+
+def test_saying_five_on_the_strip_is_remembered_and_takes_back_his_winter():
+    refusal = "On the strip he asked you to say four"
+    for setFlags in (
+        {flags.BROUGHT_AKSEL_IN: True},
+        {flags.AKSEL_WALKED_IN: True},
+        {flags.LEFT_AKSEL_AT_HUT: True},
+        {},
+    ):
+        refused = _ended(
+            facts.FIVE_OUT, **dict(setFlags, **{flags.BACKED_AKSEL_STAYING: False})
+        )
+        (aksel,) = _starting(refused, "AKSEL.")
+        assert refusal in aksel, setFlags
+        assert "the last winter he had asked for" in aksel
+        assert "He had his winter" not in aksel, setFlags
+
+        (unasked,) = _starting(_ended(facts.FIVE_OUT, **setFlags), "AKSEL.")
+        assert refusal not in unasked, setFlags
+
+
+def test_the_strip_choice_is_one_people_remember():
+    assert people.REMEMBERED[flags.BACKED_AKSEL_STAYING] == "Aksel"
 
 
 def test_the_count_names_every_way_it_was_closed():
