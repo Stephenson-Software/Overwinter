@@ -15,6 +15,7 @@ from tak import NPC
 from overwinter import facts
 from overwinter.flags import (
     AKSEL_WALKED_IN,
+    BACKED_AKSEL_STAYING,
     BROUGHT_AKSEL_IN,
     COVERED_FOR_TEO,
     DOV_HOLDS,
@@ -589,4 +590,5 @@ REMEMBERED = {
     COVERED_FOR_TEO: "Teo",
     BROUGHT_AKSEL_IN: "Aksel",
     LEFT_AKSEL_AT_HUT: "Aksel",
+    BACKED_AKSEL_STAYING: "Aksel",  # set on the strip, not in conversation
 }

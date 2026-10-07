@@ -45,6 +45,6 @@ Nothing forgets them. *X will remember that.*
 
 Each one's last page says what happened, what you did that made it happen, and what it cost whom.
 
-- **Five on the plane.** The twentieth morning; everyone gets on. The page says whether the count closed and how, what Marit will answer for at the other end, what Dov did with the report, what Teo knows, and what Aksel had.
+- **Five on the plane.** The twentieth morning; everyone gets on. The page says whether the count closed and how, what Marit will answer for at the other end, what Dov did with the report, what Teo knows, and what Aksel had — and, if he asked you on the strip to say four and you said five, that it cost him the last winter he had asked for.
 - **The dark flight.** Dov reported it. Base sent the plane in the dark on the twelfth day, in a two-hour window. It landed — the first dark flight in fifty years, and the last one killed the pilot. It took Aksel, and Marit, relieved on the spot. Three of you finished the winter. The page is honest that the flight went well and could not have.
 - **Aksel stayed.** He was on the strip when the plane came and gone across the bay before the pilot counted heads, because you let him. The ship comes in August. Marit saw, and said nothing.
