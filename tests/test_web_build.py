@@ -61,6 +61,19 @@ def test_pyodide_entry_point_builds_the_pyodide_front_end():
     assert "UIType.PYODIDE" in source and "Overwinter(" in source
 
 
+def test_run_sh_web_builds_the_game_on_the_web_front_end():
+    with open(os.path.join(REPOSITORY_ROOT, "run.sh")) as f:
+        script = f.read()
+    line = next(each for each in script.splitlines() if "UIType.WEB" in each)
+    command = line.split('python3 -c "', 1)[1].rsplit('"', 1)[0]
+    # Everything up to play(): the imports and the name the game is built
+    # with, without opening a server.
+    imports = command.rsplit(";", 1)[0]
+    namespace = {}
+    exec(imports, namespace)
+    assert "Overwinter(UIType.WEB).play()" in command
+
+
 def test_the_page_credits_the_author_outside_the_game_area():
     with open(os.path.join(REPOSITORY_ROOT, "web", "index.html")) as f:
         page = f.read()
