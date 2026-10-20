@@ -12,7 +12,7 @@ Overwinter is a text adventure built on [tak](https://github.com/Stephenson-Soft
 
 ## Play
 
-`pip install -r requirements.txt` needs `git` on your PATH: the kit is installed from its GitHub tag.
+`pip install -r requirements.txt` needs `git` on your PATH: the kit is installed from GitHub, pinned to a commit.
 
 **In your browser** — the game runs in your tab, saves live in your browser:
 
@@ -64,7 +64,7 @@ pip install pytest pytest-cov -r requirements.txt
 ./test.sh
 ```
 
-`tests/test_game.py` plays the whole winter through a scripted front-end, to each ending; if a menu label moves or a gate breaks, that test says which.
+`tests/test_game.py` and `tests/test_endings.py` play the whole winter through a scripted front-end, to each ending; if a menu label moves or a gate breaks, the failing test says which.
 
 ## License
 This project is licensed under the **Stephenson Software Non-Commercial License (Stephenson-NC)**.  
