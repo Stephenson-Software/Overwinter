@@ -6,6 +6,8 @@ from tak.saves import validateAgainstSchema
 
 from overwinter import facts, flags
 from overwinter.state import (
+    AKSEL_CRATES,
+    AKSEL_HUT,
     AKSEL_STATION,
     PLANE_DAY,
     START_FOOD,
@@ -46,6 +48,26 @@ def test_loading_drops_facts_the_game_no_longer_has():
     state = State.fromDict(data)
     assert state.facts == [facts.THE_STORE]
     assert state.factDays == {facts.THE_STORE: 2}
+
+
+def test_a_save_with_only_the_required_fields_loads_as_a_fresh_winter():
+    """A save written before a field existed carries only what the schema
+    requires; every other field comes back as a fresh winter has it, and
+    the loaded state saves again under the schema."""
+    data = {"version": 1, "day": 3, "facts": [facts.THE_STORE]}
+    validateAgainstSchema(data, "schemas/save.json")
+    state = State.fromDict(data)
+    fresh = State().toDict()
+    loaded = state.toDict()
+    assert (loaded["day"], loaded["facts"]) == (3, [facts.THE_STORE])
+    # No day is invented for a fact the old save did not date.
+    assert loaded["factDays"] == {}
+    for field in fresh:
+        if field not in ("day", "facts", "factDays"):
+            assert loaded[field] == fresh[field], field
+    assert state.akselAt == AKSEL_HUT
+    assert state.akselFood == AKSEL_CRATES
+    validateAgainstSchema(loaded, "schemas/save.json")
 
 
 def test_the_count_is_arithmetic_the_player_can_check():

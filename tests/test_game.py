@@ -2,7 +2,7 @@ import json
 import os
 
 from overwinter import facts, flags
-from overwinter.game import describeSlot
+from overwinter.game import describeSlot, slotMetadata
 from overwinter.state import AKSEL_STATION, AKSEL_STAYED, PLANE_DAY
 
 # The whole solution, from a fresh save, to the plane with five aboard and
@@ -138,6 +138,40 @@ def test_the_winter_is_saved_after_every_action_and_the_slot_describes_it(script
     assert describeSlot(metadata) == "over - five on the plane, %d known" % len(
         data["facts"]
     )
+
+
+def test_a_slot_in_progress_is_described_by_its_day_and_what_is_known():
+    data = {
+        "version": 1,
+        "day": 7,
+        "facts": [facts.THE_STORE, facts.THE_MANIFEST, "retired_fact"],
+    }
+    metadata = slotMetadata("data/slot_1", data)
+    # A fact the game no longer has is not counted as known.
+    assert metadata == {"day": 7, "known": 2, "ending": None}
+    assert describeSlot(metadata) == "Day 7, 2 known"
+
+
+def test_a_finished_slot_is_described_by_the_name_of_its_ending():
+    data = {"version": 1, "day": 12, "facts": [facts.THE_STORE]}
+    data["ending"] = facts.THE_DARK_FLIGHT
+    metadata = slotMetadata("data/slot_1", data)
+    assert metadata == {"day": 12, "known": 1, "ending": "the dark flight"}
+    assert describeSlot(metadata) == "over - the dark flight, 1 known"
+    data["ending"] = facts.AKSEL_STAYED
+    assert describeSlot(slotMetadata("data/slot_1", data)) == (
+        "over - Aksel stayed, 1 known"
+    )
+
+
+def test_a_file_that_parses_but_is_not_a_save_is_described_without_raising():
+    damaged = {"day": "?", "known": 0, "ending": None}
+    assert slotMetadata("data/slot_1", {"version": 1, "day": "seven"}) == damaged
+    assert slotMetadata("data/slot_1", {"version": 1}) == damaged
+    assert slotMetadata("data/slot_1", ["not", "a", "save"]) == damaged
+    assert describeSlot(damaged) == "Day ?, 0 known"
+    # A slot with no metadata at all reads as a fresh winter.
+    assert describeSlot({}) == "Day 1, 0 known"
 
 
 def test_a_saved_winter_resumes_where_it_was(scripted):
