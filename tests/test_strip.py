@@ -44,9 +44,10 @@ def firstEmptyHunt():
     """The index of the first draw in the winter's sequence that brings
     nothing back from the holes."""
     probe = State()
-    while probe.draw(HUNT_DRAWS) != "nothing":
-        pass
-    return probe.rngDraws - 1
+    for index in range(100):
+        if probe.draw(HUNT_DRAWS) == "nothing":
+            return index
+    raise AssertionError("no empty wait in the first 100 draws of the winter")
 
 
 def test_nothing_unlocked_leaves_only_standing_and_the_way_back():
