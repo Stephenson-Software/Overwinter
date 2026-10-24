@@ -24,6 +24,7 @@ from overwinter import (
     premise,
     progression,
     scenes,
+    stills,
     usageReporting,
 )
 from overwinter.config import Config
@@ -91,6 +92,8 @@ class Overwinter:
             tagline=TAGLINE,
             envPrefix=ENV_PREFIX,
         )
+        # The picture over each place's menu in the browser (RFC 0025).
+        self.stillAlts = stills.load()
 
         chosen = chooseSlot(
             self.ui, self.saveFileManager, TITLE + " - Save Files", describeSlot
@@ -150,6 +153,7 @@ class Overwinter:
             current = self.state.location
             if current not in self.scenes:
                 current = self.state.location = "galley"
+            stills.show(self.ui, current, self.stillAlts)
             nextScene = self.scenes[current].run()
             self.save()
             if nextScene == scenes.QUIT:

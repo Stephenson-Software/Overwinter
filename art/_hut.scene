@@ -1,0 +1,13 @@
+# The shell every Cape Ferrin interior shares: a timber hut 6 m by 5 m with a
+# 2.6 m ceiling, seen from inside its front wall. x runs left to right across
+# the room, z from the back wall (-2.5) to the front (+2.5), y up.
+# floor, ceiling, back, left and right walls (the front wall is behind the camera)
+item cube 0 -0.1 0  6.4 0.2 5.4  0.32 0.24 0.17
+item cube 0 2.7 0  6.4 0.2 5.4  0.40 0.36 0.30
+item cube 0 1.3 -2.6  6.4 2.8 0.2  0.52 0.46 0.36
+item cube -3.1 1.3 0  0.2 2.8 5.4  0.48 0.42 0.33
+item cube 3.1 1.3 0  0.2 2.8 5.4  0.48 0.42 0.33
+item cube 0 1.3 2.6  6.4 2.8 0.2  0.48 0.42 0.33
+# skirting and a ceiling beam
+item cube 0 0.06 -2.48  6 0.12 0.04  0.25 0.18 0.12
+item cube 0 2.52 0  6 0.16 0.2  0.30 0.22 0.15

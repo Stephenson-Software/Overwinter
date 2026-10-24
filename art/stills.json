@@ -1,0 +1,107 @@
+{
+  "provisional": true,
+  "note": "PROVISIONAL. Chosen by Claude to render a first pass under RFC 0025, not by the author. The setting (place, date, year), the art direction and every alt line below are the author's to change; the game's own text fixes none of them.",
+  "setting": {
+    "place": "Cape Ferrin is fictional. Rendered as a high-Arctic island at 78.0 N, 14.0 E, UTC+1.",
+    "date": "Day 1 = 2021-01-10, so day 20 = 2021-01-29.",
+    "why": [
+      "The polar dark with 'twenty days until a plane can land' and 'light enough on the strip: the twentieth day' (state.py): at 78 N the noon sun is about 9.9 degrees below the horizon on 10 January and about 6.0 degrees below on 29 January.",
+      "Strata's sky blends from night to day between about -6.9 and +14.5 degrees of sun elevation (src/render/sun.cpp), so day 1 renders as full night at every watch and day 20 is the first day the noon sky would start to show twilight.",
+      "The watches are 08:00, 14:00 and 20:00 ('it is dark for all of them').",
+      "The dark flight in the story is 'the first dark flight in fifty years' after 1971 (endings.py), hence 2021."
+    ]
+  },
+  "strata": "v0.4.0",
+  "size": [
+    640,
+    360
+  ],
+  "budgetBytes": 524288,
+  "artDirection": "Flat-coloured Strata primitives, no textures; one still per location; no people drawn (the characters are written, not drawn - RFC 0025 non-goal).",
+  "stills": {
+    "galley": {
+      "scene": "art/galley.scene",
+      "watch": "20:00",
+      "alt": "The galley at night: a table laid with plates under a hanging lamp, the iron stove glowing orange against the back wall, a shelf of tins, the flour bin, crates stacked by the store door, and a black window.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "20:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    },
+    "office": {
+      "scene": "art/office.scene",
+      "watch": "14:00",
+      "alt": "Marit's office: the station log open on the desk under a lamp, the barograph in its glass case beside it, dials on the wall, a filing cabinet, and a shelf of old log books.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "14:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    },
+    "radio": {
+      "scene": "art/radio.scene",
+      "watch": "20:00",
+      "alt": "The radio room: grey cabinets of the set with its valves glowing on top, a Morse key and an open log-book on the bench, and a chessboard with a game in progress on a small table.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "20:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    },
+    "shed": {
+      "scene": "art/shed.scene",
+      "watch": "14:00",
+      "alt": "The generator shed under one bare bulb: the green diesel on its plinth, the red day-tank on a stand, the snowmobile under a tarpaulin with its skis showing, and a sledge with iron runners.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "14:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    },
+    "bunks": {
+      "scene": "art/bunks.scene",
+      "watch": "20:00",
+      "alt": "The bunkroom: two pairs of bunks, a small stove glowing in the corner, lockers, and a reading lamp left burning on the lower left bunk.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "20:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    },
+    "strip": {
+      "scene": "art/strip.scene",
+      "watch": "14:00",
+      "alt": "The strip in the polar dark: gravel under snow running away into the night, a striped windsock straight out on its mast, red huts with lit windows, and the dark line of the ridge behind.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "14:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    },
+    "hut": {
+      "scene": "art/hut.scene",
+      "watch": "14:00",
+      "alt": "The old log hut across the bay: a stove going with a kettle on it, a lamp lit on the table beside a book, two bunks, and four crates stacked under the window.",
+      "sun": {
+        "date": "2021-01-10",
+        "time": "14:00",
+        "utcOffset": 1,
+        "latitude": 78.0,
+        "longitude": 14.0
+      }
+    }
+  }
+}

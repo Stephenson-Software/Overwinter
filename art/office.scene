@@ -1,0 +1,52 @@
+# Overwinter - Marit's office. "The barograph, the instruments, the station
+# log open on the desk." Sixty years of logs on the shelf. No figures are
+# drawn. Provisional art (RFC 0025): see stills.json.
+size 640 360
+camera 2.2 1.6 2.3  -0.9 0.8 -1.2  66 0.1 60
+lighting sun 0.5 78 4 2048 20 0.6 0
+clear 0 0 0 1 sky
+include _hut.scene
+# the desk against the back wall, and its chair
+item cube -0.6 0.76 -1.9  2.0 0.06 0.9  0.40 0.27 0.16
+item cube -1.5 0.37 -1.9  0.08 0.74 0.8  0.33 0.22 0.13
+item cube 0.3 0.37 -1.9  0.08 0.74 0.8  0.33 0.22 0.13
+item cube -0.6 0.47 -1.0  0.48 0.06 0.46  0.22 0.20 0.20
+item cube -0.6 0.8 -0.8  0.48 0.6 0.06  0.22 0.20 0.20
+item cylinder -0.6 0.23 -1.0  0.06 0.22 0.06  0.15 0.15 0.15
+# the log, open: two white pages and a pen
+item cube -0.82 0.80 -1.75  0.4 0.02 0.52  0.92 0.90 0.82
+item cube -0.4 0.80 -1.75  0.4 0.02 0.52  0.90 0.88 0.80
+item cube -0.61 0.795 -1.75  0.04 0.02 0.54  0.25 0.15 0.10
+item cube -0.25 0.815 -1.6  0.2 0.012 0.012  0.1 0.1 0.15
+# the barograph: a drum under a glass case on the desk's end
+item cube 0.05 0.83 -2.05  0.42 0.08 0.26  0.22 0.14 0.08
+item cylinder -0.02 0.94 -2.05  0.14 0.07 0.14  0.85 0.85 0.80
+item cube 0.13 0.95 -2.05  0.14 0.1 0.1  0.55 0.50 0.35
+item cube 0.05 0.97 -2.05  0.44 0.2 0.28  0.70 0.80 0.85 0.25
+# the desk lamp
+item cylinder -1.25 0.80 -2.15  0.18 0.02 0.18  0.10 0.12 0.10
+item cylinder -1.25 1.0 -2.15  0.03 0.2 0.03  0.10 0.12 0.10
+item cylinder -1.2 1.22 -2.05  0.24 0.07 0.24  0.12 0.30 0.18
+light point -1.2 1.12 -1.95  5  1.0 0.85 0.6  2.6
+# the instruments on the left wall: dials on boards, a thermometer
+item cube -2.98 1.6 -1.4  0.04 0.6 0.5  0.32 0.22 0.14
+item cylinder -2.95 1.65 -1.4  0.3 0.02 0.3  0.88 0.86 0.80
+item cube -2.98 1.6 -0.6  0.04 0.6 0.5  0.32 0.22 0.14
+item cylinder -2.95 1.65 -0.6  0.3 0.02 0.3  0.88 0.86 0.80
+item cube -2.97 1.5 0.1  0.04 0.8 0.08  0.85 0.85 0.85
+item cube -2.95 1.25 0.1  0.03 0.2 0.03  0.75 0.10 0.10
+# the shelf of station logs on the right wall: sixty years of spines
+item cube 2.85 1.2 -1.0  0.3 2.2 2.4  0.36 0.25 0.15
+item cube 2.7 0.6 -1.0  0.02 0.04 2.4  0.30 0.20 0.12
+item cube 2.7 1.15 -1.0  0.02 0.04 2.4  0.30 0.20 0.12
+item cube 2.7 1.7 -1.0  0.02 0.04 2.4  0.30 0.20 0.12
+item cube 2.7 2.15 -1.0  0.02 0.04 2.4  0.30 0.20 0.12
+include _log_spines.scene
+# a window over the desk: the dark
+item cube -0.6 1.65 -2.49  1.0 0.8 0.04  0.20 0.17 0.13
+item cube -0.6 1.65 -2.47  0.86 0.66 0.04  0.02 0.03 0.07
+# ceiling light, off; a filing cabinet by the door
+item cube 1.5 0.65 -2.1  0.5 1.3 0.6  0.35 0.38 0.34
+item cube 1.5 0.95 -1.79  0.3 0.04 0.02  0.6 0.6 0.55
+item cube 1.5 0.45 -1.79  0.3 0.04 0.02  0.6 0.6 0.55
+light point 0.6 2.3 0.2  8  1.0 0.88 0.70  1.4 shadow
