@@ -1,0 +1,15 @@
+# Teo's bunks on the left wall: the lower one slept in, with his reading lamp
+# clipped to the frame and burning - "Teo's light is always on".
+item cube -2.55 0.3 -1.0  0.9 0.06 2.0  0.40 0.28 0.18
+item cube -2.55 0.42 -1.0  0.82 0.16 1.9  0.62 0.62 0.58
+item cube -2.5 0.54 -0.7  0.8 0.1 1.4  0.20 0.35 0.30
+item cube -2.55 0.56 -1.75  0.5 0.12 0.3  0.88 0.88 0.84
+item cube -2.55 1.4 -1.0  0.9 0.06 2.0  0.40 0.28 0.18
+item cube -2.55 1.52 -1.0  0.82 0.16 1.9  0.62 0.62 0.58
+item cube -2.55 1.62 -0.85  0.78 0.06 1.6  0.30 0.25 0.20
+item cube -2.1 0.95 -2.0  0.08 1.9 0.08  0.35 0.25 0.16
+item cube -2.1 0.95 0.0  0.08 1.9 0.08  0.35 0.25 0.16
+item cube -2.12 1.05 -1.6  0.06 0.06 0.06  0.15 0.15 0.15
+item cylinder -2.2 1.1 -1.6  0.14 0.06 0.14  0.85 0.75 0.30
+light point -2.25 1.0 -1.5  5  1.0 0.88 0.6  2.4 shadow
+item cube -2.4 0.52 -0.2  0.16 0.04 0.22  0.80 0.78 0.70

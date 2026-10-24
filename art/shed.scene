@@ -1,0 +1,58 @@
+# Overwinter - the generator shed, across the yard. "The diesel, the
+# day-tank, the snowmobile under a tarpaulin." One bare bulb. No figures are
+# drawn. Provisional art (RFC 0025): see stills.json.
+size 640 360
+camera 2.5 1.7 2.2  -0.6 0.6 -1.3  64 0.1 60
+lighting sun 0.5 78 4 2048 20 0.6 0
+clear 0 0 0 1 sky
+# a plank shed on a concrete floor, painted long ago
+item cube 0 -0.1 0  6.4 0.2 5.4  0.36 0.36 0.35
+item cube 0 2.7 0  6.4 0.2 5.4  0.26 0.24 0.22
+item cube 0 1.3 -2.6  6.4 2.8 0.2  0.34 0.38 0.34
+item cube -3.1 1.3 0  0.2 2.8 5.4  0.32 0.36 0.32
+item cube 3.1 1.3 0  0.2 2.8 5.4  0.32 0.36 0.32
+item cube 0 1.3 2.6  6.4 2.8 0.2  0.32 0.36 0.32
+item cube 0 2.45 -1.2  6 0.14 0.14  0.22 0.18 0.14
+item cube 0 2.45 1.2  6 0.14 0.14  0.22 0.18 0.14
+# the diesel on its plinth: engine block, alternator, flywheel guard, exhaust
+item cube -1.4 0.08 -1.7  2.6 0.16 1.2  0.45 0.45 0.44
+item cube -1.9 0.65 -1.7  1.2 0.95 0.85  0.18 0.32 0.22
+item cube -1.9 1.18 -1.7  1.0 0.12 0.7  0.16 0.28 0.19
+item cube -0.85 0.6 -1.7  0.9 0.8 0.75  0.20 0.34 0.24
+item cylinder -0.35 0.6 -1.7  0.6 0.08 0.6  0.55 0.12 0.10
+item cube -2.0 0.85 -1.26  0.5 0.25 0.02  0.85 0.80 0.70
+item cylinder -1.6 1.9 -2.1  0.14 0.7 0.14  0.25 0.22 0.20
+item cylinder -1.6 2.6 -2.1  0.18 0.12 0.18  0.20 0.18 0.16
+# the day-tank on its stand, its gauge glass and pipe
+item cube 0.6 0.5 -2.2  0.7 0.04 0.6  0.25 0.25 0.25
+item cube 0.32 0.25 -2.2  0.05 0.5 0.05  0.25 0.25 0.25
+item cube 0.88 0.25 -2.2  0.05 0.5 0.05  0.25 0.25 0.25
+item cylinder 0.6 0.98 -2.2  0.6 0.46 0.6  0.62 0.16 0.12
+item cube 0.6 1.0 -1.89  0.04 0.5 0.02  0.75 0.70 0.45
+item cube -0.05 0.55 -2.2  1.2 0.04 0.04  0.20 0.20 0.20
+# the snowmobile under a tarpaulin, ski tips showing
+item cube 1.6 0.45 -0.4  1.0 0.55 2.0  0.30 0.34 0.20
+item capsule 1.6 0.85 -0.55  0.8 0.3 0.8  0.28 0.32 0.19
+item cube 1.6 0.95 0.15  0.7 0.25 0.5  0.30 0.34 0.20
+item cube 1.35 0.06 0.78  0.12 0.06 0.6  0.12 0.12 0.12
+item cube 1.85 0.06 0.78  0.12 0.06 0.6  0.12 0.12 0.12
+item cube 1.35 0.12 1.06  0.12 0.06 0.06  0.12 0.12 0.12
+item cube 1.85 0.12 1.06  0.12 0.06 0.06  0.12 0.12 0.12
+# the sledge with iron runners, along the left wall
+item cube -2.3 0.32 0.6  0.75 0.06 2.4  0.55 0.42 0.26
+item cube -2.6 0.06 0.6  0.05 0.12 2.6  0.20 0.20 0.22
+item cube -2.0 0.06 0.6  0.05 0.12 2.6  0.20 0.20 0.22
+item cube -2.6 0.2 -0.2  0.05 0.25 0.05  0.45 0.34 0.20
+item cube -2.0 0.2 -0.2  0.05 0.25 0.05  0.45 0.34 0.20
+item cube -2.6 0.2 1.4  0.05 0.25 0.05  0.45 0.34 0.20
+item cube -2.0 0.2 1.4  0.05 0.25 0.05  0.45 0.34 0.20
+# jerrycans, a workbench and a maintenance book on it
+item cube 2.6 0.2 -2.2  0.18 0.4 0.32  0.60 0.15 0.10
+item cube 2.85 0.2 -2.2  0.18 0.4 0.32  0.60 0.15 0.10
+item cube 2.6 0.85 -1.7  0.8 0.05 1.0  0.42 0.32 0.20
+item cube 2.6 0.42 -1.7  0.7 0.84 0.9  0.30 0.24 0.16
+item cube 2.5 0.89 -1.75  0.2 0.03 0.28  0.20 0.25 0.45
+# the bare bulb on its flex
+item cylinder 0.3 2.3 -0.4  0.01 0.3 0.01  0.05 0.05 0.05
+item sphere 0.3 2.0 -0.4  0.06 0.08 0.06  1.0 0.95 0.75
+light point 0.3 1.75 -0.4  9  1.0 0.88 0.62  2.6 shadow

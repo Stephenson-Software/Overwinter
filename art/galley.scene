@@ -1,0 +1,60 @@
+# Overwinter - the galley. "Your stove, your table, and the store behind the
+# door: ten crates, a shelf of tins, and the flour bin." Evening: the stove is
+# lit and the table laid. Provisional art (RFC 0025): see stills.json.
+size 640 360
+camera 2.5 1.65 2.2  -0.6 0.75 -1.4  62 0.1 60
+lighting sun 0.5 78 4 2048 20 0.6 0
+clear 0 0 0 1 sky
+include _hut.scene
+# window in the left wall: black glass in a frame (the polar dark outside)
+item cube -2.99 1.55 -0.6  0.04 0.9 1.1  0.20 0.17 0.13
+item cube -2.97 1.55 -0.6  0.04 0.76 0.96  0.02 0.03 0.07
+# the stove against the back wall, its pipe, and the fire behind its door
+item cube -1.6 0.45 -2.1  0.9 0.9 0.6  0.10 0.10 0.11
+item cube -1.6 0.92 -2.1  0.96 0.05 0.66  0.16 0.16 0.17
+item cylinder -1.4 1.75 -2.3  0.16 0.85 0.16  0.12 0.12 0.13
+item cube -1.6 0.42 -1.79  0.36 0.22 0.02  0.95 0.45 0.12
+item cylinder -1.85 1.0 -2.1  0.26 0.08 0.26  0.30 0.30 0.32
+light point -1.6 0.5 -1.55  6  1.0 0.5 0.18  3 shadow
+# the store door at the back, ajar
+item cube 1.6 1.0 -2.48  0.95 2.0 0.06  0.36 0.26 0.18
+item cube 1.95 1.0 -2.44  0.06 0.08 0.04  0.7 0.65 0.5
+# shelf of tins beside it
+item cube 0.4 1.5 -2.38  1.3 0.04 0.24  0.38 0.28 0.19
+item cylinder 0.0 1.6 -2.36  0.12 0.08 0.12  0.62 0.58 0.50
+item cylinder 0.16 1.6 -2.36  0.12 0.08 0.12  0.70 0.30 0.22
+item cylinder 0.32 1.6 -2.36  0.12 0.08 0.12  0.62 0.58 0.50
+item cylinder 0.48 1.6 -2.36  0.12 0.08 0.12  0.35 0.50 0.30
+item cylinder 0.64 1.6 -2.36  0.12 0.08 0.12  0.62 0.58 0.50
+item cylinder 0.80 1.6 -2.36  0.12 0.08 0.12  0.70 0.30 0.22
+# crates stacked by the store door (a lid board on each) and the flour bin
+item cube 2.6 0.22 -2.15  0.5 0.44 0.44  0.50 0.38 0.22
+item cube 2.6 0.45 -2.15  0.52 0.03 0.46  0.36 0.26 0.15
+item cube 2.6 0.66 -2.15  0.5 0.44 0.44  0.46 0.35 0.20
+item cube 2.6 0.89 -2.15  0.52 0.03 0.46  0.36 0.26 0.15
+item cube 2.65 0.22 -1.6  0.5 0.44 0.44  0.48 0.36 0.21
+item cube 2.65 0.45 -1.6  0.52 0.03 0.46  0.36 0.26 0.15
+item cylinder 0.6 0.35 -2.15  0.5 0.35 0.5  0.78 0.76 0.70
+# the table, laid, and four chairs
+item cube 0 0.74 -0.2  1.8 0.06 1.0  0.45 0.32 0.20
+item cube -0.8 0.37 -0.6  0.07 0.74 0.07  0.35 0.25 0.16
+item cube 0.8 0.37 -0.6  0.07 0.74 0.07  0.35 0.25 0.16
+item cube -0.8 0.37 0.2  0.07 0.74 0.07  0.35 0.25 0.16
+item cube 0.8 0.37 0.2  0.07 0.74 0.07  0.35 0.25 0.16
+item cylinder -0.5 0.78 -0.45  0.26 0.01 0.26  0.85 0.85 0.82
+item cylinder 0.5 0.78 -0.45  0.26 0.01 0.26  0.85 0.85 0.82
+item cylinder -0.5 0.78 0.05  0.26 0.01 0.26  0.85 0.85 0.82
+item cylinder 0.5 0.78 0.05  0.26 0.01 0.26  0.85 0.85 0.82
+item cylinder 0 0.86 -0.2  0.14 0.1 0.14  0.75 0.72 0.65
+item cube -0.5 0.45 -1.1  0.42 0.05 0.42  0.40 0.28 0.18
+item cube -0.5 0.75 -1.3  0.42 0.6 0.05  0.40 0.28 0.18
+item cube 0.5 0.45 -1.1  0.42 0.05 0.42  0.40 0.28 0.18
+item cube 0.5 0.75 -1.3  0.42 0.6 0.05  0.40 0.28 0.18
+item cube -0.5 0.45 0.7  0.42 0.05 0.42  0.40 0.28 0.18
+item cube -0.5 0.75 0.9  0.42 0.6 0.05  0.40 0.28 0.18
+item cube 0.5 0.45 0.7  0.42 0.05 0.42  0.40 0.28 0.18
+item cube 0.5 0.75 0.9  0.42 0.6 0.05  0.40 0.28 0.18
+# the lamp over the table
+item cylinder 0 2.35 -0.2  0.02 0.2 0.02  0.1 0.1 0.1
+item cylinder 0 2.12 -0.2  0.36 0.05 0.36  0.25 0.30 0.22
+light point 0 1.95 -0.2  8  1.0 0.82 0.55  2.2 shadow
