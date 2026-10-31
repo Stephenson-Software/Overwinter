@@ -6,7 +6,7 @@
 
 The plane that brought you to Cape Ferrin left an hour ago and cannot come back until there is light enough to land on. You are the cook; you took the job because nobody else would. The store is in the galley, and the store is your job. Nobody has asked you to count it.
 
-When you do, it is five days short.
+When you do, it is four days short.
 
 Overwinter is a text adventure built on [tak](https://github.com/Stephenson-Software/tak), the text-adventure kit, and a sibling of [Tidewater](https://github.com/Stephenson-Software/Tidewater). No time loop this time: the winter runs on, everything you learn lasts, everything you say is remembered, and the twentieth morning says plainly what you did.
 
