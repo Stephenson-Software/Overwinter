@@ -38,9 +38,9 @@ AKSEL_STAYED = "aksel_stayed"
 FACTS = {
     THE_STORE: {
         "title": "The store",
-        "text": "You counted the store yourself: fifteen days of food at four, "
-        "and the plane cannot come for twenty. Nobody has said so. Marit "
-        "signed for more than this.",
+        "text": "You counted the store yourself: it started the winter at "
+        "fifteen days of food at four, and the plane cannot come for twenty. "
+        "Nobody has said so. Marit signed for more than this.",
         "leads": [
             {
                 "to": THE_MANIFEST,

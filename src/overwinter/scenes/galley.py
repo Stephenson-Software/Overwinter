@@ -98,10 +98,15 @@ class Galley(Scene):
         return self.spend(1)
 
     def count(self):
-        state = self.state
         first = self.game.learn(facts.THE_STORE)
-        if first:
-            self.ui.showDialogue(
+        self.ui.showDialogue(self.firstCount() if first else self.sum())
+
+    def firstCount(self):
+        """The first count says what is on the shelf that day: nothing makes
+        the cook do it on the first morning."""
+        state = self.state
+        if state.food == START_FOOD and state.mouths == STATION_MOUTHS:
+            return (
                 "You count it properly, crate by crate and tin by tin: ten "
                 "crates and the shelf. %d rations. Fifteen days at four, and "
                 "the plane comes on the twentieth.\n\nNobody has said so. "
@@ -109,8 +114,15 @@ class Galley(Scene):
                 "the plane's manifest was on the seat beside you, and you "
                 "remember it being longer than this." % state.food
             )
-            return
-        self.ui.showDialogue(self.sum())
+        return (
+            "You count it properly, crate by crate and tin by tin, as you "
+            "should have on the first morning. %d rations left, at %d a day, "
+            "and the plane comes on the twentieth.\n\nNobody has said so. "
+            "You check the shelf twice. %s. Marit signed for more than this; "
+            "the plane's manifest was on the seat beside you, and you "
+            "remember it being longer than this."
+            % (state.food, state.mouths, people.storeDays(state))
+        )
 
     def sum(self):
         """The count, as plain arithmetic, for the galley and the journal."""

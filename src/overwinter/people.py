@@ -28,7 +28,18 @@ from overwinter.flags import (
     TOLD_DOV,
     TOLD_MARIT_ABOUT_TEO,
 )
-from overwinter.state import AKSEL_HUT, AKSEL_STATION
+from overwinter.state import AKSEL_HUT, AKSEL_STATION, START_FOOD, STATION_MOUTHS
+
+
+def storeDays(state):
+    """The days on the shelf, as the cook says them at the start of a line.
+
+    Nothing makes the cook count on the first morning, so a line that gives
+    the figure reads the store as it stands."""
+    days = state.foodDays
+    if days == START_FOOD // STATION_MOUTHS:
+        return "Fifteen days"
+    return "%d day%s" % (days, "" if days == 1 else "s")
 
 
 def marit(game):
@@ -36,10 +47,15 @@ def marit(game):
 
     def aboutTheStore():
         return (
-            "Fifteen days. (She does not look up from the barograph.) You "
-            "counted it, then. Good; that is what the cook is for. I signed "
-            "for what was landed. Count it again on the fifth day, when the "
-            "ice holds, and come and tell me the figure."
+            "%s. (She does not look up from the barograph.) You counted it, "
+            "then. Good; that is what the cook is for. I signed for what was "
+            "landed. Count it again %s, and come and tell me the figure."
+            % (
+                storeDays(state),
+                "now the ice holds"
+                if state.iceSafe
+                else "on the fifth day, when the ice holds",
+            )
         )
 
     def aboutTheManifest():
@@ -139,7 +155,7 @@ def marit(game):
                 "weather by the end of the week. Is the galley in order?",
             },
             {
-                "question": "I've counted the store. Fifteen days.",
+                "question": "I've counted the store. %s." % storeDays(state),
                 "response": aboutTheStore,
                 "condition": lambda: state.knows(facts.THE_STORE)
                 and not state.knows(facts.THE_MANIFEST),

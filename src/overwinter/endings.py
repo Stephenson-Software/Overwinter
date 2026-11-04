@@ -44,10 +44,13 @@ def _theCount(state):
     if lean:
         closing = (
             "THE COUNT. It did not close. The store was empty on day %d and "
-            "the last %d days were pemmican, seal if there was any, and "
-            "very little of either. Everyone came off the plane thin and Teo "
-            "has said he will not winter again."
-            % (state.flags[flags.STORE_EMPTIED_ON], lean)
+            "%s pemmican, seal if there was any, and very little of either. "
+            "Everyone came off the plane thin and Teo has said he will not "
+            "winter again."
+            % (
+                state.flags[flags.STORE_EMPTIED_ON],
+                "the last day was" if lean == 1 else "the last %d days were" % lean,
+            )
         )
     elif parts:
         closing = (

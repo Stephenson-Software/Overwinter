@@ -43,9 +43,10 @@ PARAGRAPHS = [
     ),
     (
         (facts.THE_STORE,),
-        "WHAT IS HAPPENING TO YOU. There is not enough food. Fifteen days "
-        "of it, at four, and the plane comes on the twentieth. Nobody has "
-        "said so, and the woman who signed for it does not miscount. "
+        "WHAT IS HAPPENING TO YOU. There is not enough food. The store "
+        "started at fifteen days of it, at four, and the plane comes on the "
+        "twentieth. Nobody has said so, and the woman who signed for it does "
+        "not miscount. "
         "Something is being kept from you, and it is being kept in your "
         "own galley. Everything you learn about this station goes in your "
         "journal; under each thing is where it points that you have not "
