@@ -139,6 +139,15 @@ def test_an_empty_store_is_counted_in_lean_days_before_anything_else():
     )
 
 
+def test_one_lean_day_is_a_day():
+    state = _ended(facts.FIVE_OUT, **{flags.STORE_EMPTIED_ON: 19})
+    (count,) = _starting(state, "THE COUNT.")
+    assert count.startswith(
+        "THE COUNT. It did not close. The store was empty on day 19 and the "
+        "last day was pemmican"
+    )
+
+
 def test_a_count_nobody_closed_and_that_never_ran_out_says_so():
     (count,) = _starting(_ended(facts.FIVE_OUT), "THE COUNT.")
     assert count.startswith("THE COUNT. It closed on its own, barely")

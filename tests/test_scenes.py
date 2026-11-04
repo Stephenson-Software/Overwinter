@@ -4,13 +4,14 @@ FakeGame, so the time they cost and what they say are pinned down."""
 
 from conftest import FakeGame, ScriptedUI
 
-from overwinter import facts, flags
+from overwinter import facts, flags, premise
 from overwinter.scenes.bunks import Bunks
 from overwinter.scenes.epilogue import Epilogue
 from overwinter.scenes.galley import Galley
 from overwinter.scenes.hut import Hut
 from overwinter.scenes.shed import Shed
-from overwinter.state import AKSEL_HUT, AKSEL_STATION, EVENING, MORNING
+from overwinter.state import AKSEL_HUT, AKSEL_STATION, EVENING, MORNING, State
+from test_game import SLEEP, TURN_IN
 
 
 def scene(sceneClass, script, location):
@@ -65,6 +66,45 @@ def test_full_rations_undo_half_rations_and_the_row_turns_back():
 
     assert galley.run() == "quit"
     assert reasonFor(game.ui, "Put the station on half rations") is None
+
+
+def test_the_first_morning_count_is_the_store_as_landed():
+    game, galley = scene(Galley, ["Count the store"], "galley")
+    assert galley.run() == "galley"
+    assert game.ui.saw("60 rations. Fifteen days at four")
+    assert game.ui.saw("You check the shelf twice. Fifteen.")
+
+
+def test_a_first_count_put_off_a_week_says_what_is_left(scripted):
+    script = (
+        ["Create New Save"]
+        + TURN_IN
+        + SLEEP * 5
+        + ["Go to the galley", "Count the store", "Quit"]
+    )
+    game, ui = scripted(script)
+    game.play()
+    assert game.state.day == 7
+    assert game.state.food == 36
+    assert ui.saw("36 rations left, at 4 a day")
+    assert ui.saw("You check the shelf twice. 9 days.")
+    assert not ui.saw("Fifteen")
+
+
+def test_a_first_count_with_aksel_at_the_table_divides_by_five():
+    game, galley = scene(Galley, ["Count the store"], "galley")
+    game.state.akselAt = AKSEL_STATION
+    assert galley.run() == "galley"
+    assert game.ui.saw("60 rations left, at 5 a day")
+    assert game.ui.saw("You check the shelf twice. 12 days.")
+    assert not game.ui.saw("Fifteen")
+
+
+def test_the_stores_journal_line_stays_true_after_the_store_is_eaten_into():
+    assert "started the winter at fifteen days" in facts.text(facts.THE_STORE)
+    state = State()
+    state.learn(facts.THE_STORE)
+    assert "started at fifteen days" in premise.text(state)
 
 
 def test_looking_around_the_hut_with_aksel_in_it_finds_the_crates():

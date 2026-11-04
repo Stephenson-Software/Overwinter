@@ -39,6 +39,30 @@ def test_marit_answers_the_count_until_the_manifest_and_the_manifest_until_aksel
     assert not game.state.knows(facts.MARITS_ARITHMETIC)
 
 
+def test_marit_is_told_the_days_on_the_shelf_not_the_days_that_were_landed():
+    game = FakeGame()
+    game.learn(facts.THE_STORE)
+    game.state.day = 7
+    game.state.food = 36
+    marit = people.marit(game)
+    assert "I've counted the store. 9 days." in questions(marit)
+
+    answer = ask(marit, "I've counted the store")
+    assert answer.startswith("9 days. (She does not look up")
+    # The ice has held by now: she does not send you to a day already gone.
+    assert "Count it again now the ice holds" in answer
+    assert "fifth day" not in answer
+
+
+def test_a_store_with_one_day_left_is_one_day():
+    game = FakeGame()
+    game.learn(facts.THE_STORE)
+    game.state.food = 4
+    marit = people.marit(game)
+    assert "I've counted the store. 1 day." in questions(marit)
+    assert ask(marit, "I've counted the store").startswith("1 day. (She")
+
+
 def test_refusing_to_keep_marits_secret_is_remembered_and_closes_the_choice():
     game = FakeGame()
     marit = people.marit(game)
