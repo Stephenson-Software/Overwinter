@@ -41,6 +41,55 @@ def test_telling_dov_and_sending_it_brings_the_dark_flight(scripted):
     assert ui.menus[-1][0].startswith("The winter is over: the dark flight")
 
 
+def _answeringAksel(answer):
+    """Up to day five, across the bay, with Aksel given his answer."""
+    return (
+        DAY_ONE
+        + DAY_TWO
+        + DAYS_THREE_AND_FOUR
+        + [
+            "Go outside",
+            "Cross the bay",  # THE_FIFTH
+            "Talk to Aksel",
+            "Why are you out here",  # AKSELS_WINTER
+            answer,
+            "[Back]",
+        ]
+    )
+
+
+def test_aksel_brought_in_then_reported_is_at_the_table_on_the_last_page(scripted):
+    script = (
+        _answeringAksel("Come back to the station")  # BROUGHT_AKSEL_IN
+        + ["Go to the radio room", "Talk to Dov", "There is a fifth man"]
+        + ["Send it.", "[Back]"]
+        + TURN_IN
+        + SLEEP * (DARK_FLIGHT_DAY - 6)
+        + ["Quit"]
+    )
+    game, ui = scripted(script)
+    game.play()
+    assert game.state.ending == facts.THE_DARK_FLIGHT
+    assert ui.saw("AKSEL. You asked him to come in and he came")
+    assert not ui.saw("AKSEL. He was in the old hut")
+
+
+def test_aksel_left_at_the_hut_then_reported_is_left_on_the_last_page(scripted):
+    script = (
+        _answeringAksel("Stay, then")  # LEFT_AKSEL_AT_HUT
+        + ["Go back across the bay", "Go to the radio room", "Talk to Dov"]
+        + ["There is a fifth man", "Send it.", "[Back]"]
+        + TURN_IN
+        + SLEEP * (DARK_FLIGHT_DAY - 6)
+        + ["Quit"]
+    )
+    game, ui = scripted(script)
+    game.play()
+    assert game.state.ending == facts.THE_DARK_FLIGHT
+    assert ui.saw("AKSEL. You left him in the old hut across the bay, as he asked")
+    assert not ui.saw("AKSEL. He was in the old hut")
+
+
 def test_walking_away_from_dov_is_sending_it(scripted):
     script = (
         DAY_ONE
