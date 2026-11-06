@@ -178,3 +178,24 @@ def test_the_dark_flight_leaves_out_marit_and_dov_but_not_teo():
     assert _starting(state, "TEO. You told Marit about the night hours")
     assert _starting(state, "THE REST. Three of you finished the winter")
     assert not _starting(state, "THE COUNT.")
+
+
+def test_aksel_on_the_dark_flight_page_follows_how_he_was_left():
+    who = "the cook before you, sixty-seven, failed on his medical"
+    cases = [
+        ({flags.BROUGHT_AKSEL_IN: True}, "AKSEL. You asked him to come in and he came"),
+        ({flags.LEFT_AKSEL_AT_HUT: True}, "AKSEL. You left him in the old hut"),
+        ({}, "AKSEL. He was in the old hut across the bay"),
+    ]
+    for setFlags, line in cases:
+        (aksel,) = _starting(_ended(facts.THE_DARK_FLIGHT, **setFlags), "AKSEL.")
+        assert aksel.startswith(line), setFlags
+        assert who in aksel, setFlags
+        assert aksel.endswith("He did not argue on the strip."), setFlags
+
+
+def test_a_man_brought_to_the_table_is_not_in_the_hut_on_the_dark_flight_page():
+    state = _ended(facts.THE_DARK_FLIGHT, **{flags.BROUGHT_AKSEL_IN: True})
+    (aksel,) = _starting(state, "AKSEL.")
+    assert "He was in the old hut" not in aksel
+    assert "That is where the four crates went." not in aksel

@@ -197,6 +197,36 @@ def _akselStayed(state):
     return "\n\n".join([opening, _theCount(state), aksel] + _people(state) + [close])
 
 
+def _darkFlightAksel(state):
+    # The store cannot run out before the flight, so he never walks in here.
+    who = (
+        "the cook before you, sixty-seven, failed on his medical and given "
+        "one more winter by Marit against every rule she had."
+    )
+    if state.flags.get(flags.BROUGHT_AKSEL_IN):
+        return (
+            "AKSEL. You asked him to come in and he came, and he was eating "
+            "at the table with the rest of you when the plane came for him. "
+            "He was "
+            + who
+            + " The four crates that went across the bay with him came back "
+            "on his sledge. He did not argue on the strip."
+        )
+    if state.flags.get(flags.LEFT_AKSEL_AT_HUT):
+        return (
+            "AKSEL. You left him in the old hut across the bay, as he asked, "
+            "and the report fetched him out of it. He was "
+            + who
+            + " That is where the four crates went. He did not argue on the "
+            "strip."
+        )
+    return (
+        "AKSEL. He was in the old hut across the bay, "
+        + who
+        + " That is where the four crates went. He did not argue on the strip."
+    )
+
+
 def _darkFlight(state):
     opening = (
         "WHAT HAPPENED. You told Dov there were five of you, and Dov sent "
@@ -205,12 +235,6 @@ def _darkFlight(state):
         "not see the ridge from. It landed. It took Aksel Rue out, and "
         "Marit with him, relieved of the station on the spot. It was the "
         "first dark flight in fifty years. The last one killed the pilot."
-    )
-    aksel = (
-        "AKSEL. He was in the old hut across the bay, the cook before you, "
-        "sixty-seven, failed on his medical and given one more winter by "
-        "Marit against every rule she had. That is where the four crates "
-        "went. He did not argue on the strip."
     )
     rest = (
         "THE REST. Three of you finished the winter with food for four, and "
@@ -228,7 +252,7 @@ def _darkFlight(state):
         for line in _people(state)
         if not line.startswith("DOV") and not line.startswith("MARIT")
     ]
-    return "\n\n".join([opening, aksel, rest] + people + [close])
+    return "\n\n".join([opening, _darkFlightAksel(state), rest] + people + [close])
 
 
 def name(state):
