@@ -16,7 +16,7 @@ There is not enough food. The store holds fifteen days at four; the plane is twe
 
 Across the bay, on the sledge, the week before the plane. There is a hut over there — the original station, closed up in 1961 with its stove and bunks left in "against need" — and **Aksel Rue** is in it: the cook here for four winters until this one, sixty-seven, failed his medical in the spring on age and nothing else, and told he would not winter again. He came out on the August supply ship as a visitor and asked Marit for one more winter. She said yes, signed him off the ship on paper, and carried four crates across to him before the bay froze.
 
-That is why your store is short: Marit gave Aksel a share of the station's food. Her plan for the gap was the 1958 emergency depot on the headland and the seals off the point — fetched once the ice held. The ice held late this year, the storm is coming, and she told nobody, because the one person who would have to report a fifth man is Dov, and Dov reports things.
+That is why your store is short: Marit gave Aksel a share of the station's food. Her plan for the gap was the 1958 emergency depot on the headland and the seals off the point — fetched once the ice held. The ice held late this year, which left her no time before the storm, and she told nobody, because the one person who would have to report a fifth man is Dov, and Dov reports things.
 
 ## The other pieces
 

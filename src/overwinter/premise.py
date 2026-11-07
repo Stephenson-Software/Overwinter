@@ -82,8 +82,9 @@ PARAGRAPHS = [
         "MARIT'S SUM. She signed him off the manifest and carried his crates "
         "across. The station's gap she meant to close with the old depot "
         "on the headland and the seals off the point, once the ice held. "
-        "The ice held late and the storm is coming, and she told nobody, "
-        "because the one person who would have to report it is Dov.",
+        "The ice held late, which left her no time before the storm, and "
+        "she told nobody, because the one person who would have to report "
+        "it is Dov.",
     ),
     (
         (facts.THE_RULE,),
@@ -116,8 +117,9 @@ PARAGRAPHS = [
     (
         (facts.TEOS_NIGHTS,),
         "THE OTHER COUNT. Teo has been running the generator all night "
-        "because he cannot sleep in the dark. The storm margin of fuel is "
-        "gone. Marit can fix that if she knows; Teo will know who told her.",
+        "because he cannot sleep in the dark, and the storm margin of fuel "
+        "went on it. Only Marit could cut the night hours, and Teo would "
+        "know who told her.",
     ),
     (
         (facts.THE_DARK_FLIGHT,),

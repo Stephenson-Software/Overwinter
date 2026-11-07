@@ -87,6 +87,44 @@ def test_marit_refuses_half_rations_until_the_sum_is_hers_too():
     assert "I want to put the station on half rations." in questions(marit)
 
 
+def test_marit_refuses_half_rations_in_words_that_hold_on_any_day():
+    game = FakeGame()
+    marit = people.marit(game)
+    game.learn(facts.THE_STORE)
+    for day in (1, 8, 15, 19):
+        game.state.day = day
+        answer = ask(marit, "I want to put the station on half")
+        assert "second week" not in answer
+
+
+def test_marit_stops_forecasting_the_storm_once_it_has_come():
+    game = FakeGame()
+    marit = people.marit(game)
+    game.state.day = STORM_DAYS[0] - 1
+    assert "there will be weather" in ask(marit, "How is the station looking?")
+
+    # The first of these is the storm's first day, its night still to come.
+    for day in (STORM_DAYS[0], STORM_DAYS[-1], STORM_DAYS[-1] + 1):
+        game.state.day = day
+        answer = ask(marit, "How is the station looking?")
+        assert "there will be weather" not in answer
+        assert "The glass said weather" in answer
+
+
+def test_marits_arithmetic_says_the_storm_is_coming_only_before_it_comes():
+    def herSum(day):
+        game = FakeGame()
+        game.state.day = day
+        game.learn(facts.THE_FIFTH)
+        return ask(people.marit(game), "I've been across the bay")
+
+    assert "there is a storm coming" in herSum(STORM_DAYS[0] - 1)
+    for day in (STORM_DAYS[0], STORM_DAYS[-1] + 1, 15):
+        answer = herSum(day)
+        assert "there is a storm coming" not in answer
+        assert "then the storm came" in answer
+
+
 def test_marit_and_dov_speak_about_the_storm_night_only_if_the_tank_ran_dry():
     game = FakeGame()
     marit, dov = people.marit(game), people.dov(game)
@@ -133,6 +171,23 @@ def test_teo_speaks_about_the_storm_night_by_what_was_done_about_his_nights():
     assert "You told her" in teoAfterTheStorm(flags.TOLD_MARIT_ABOUT_TEO)
     assert "you let me have the lights" in teoAfterTheStorm(flags.COVERED_FOR_TEO)
     assert "Don't ask me why" in teoAfterTheStorm()
+
+
+def test_teo_warns_of_the_tank_until_the_storm_night_and_owns_it_after():
+    def theFuel(day):
+        game = FakeGame()
+        game.state.day = day
+        game.state.flags[flags.MET_TEO] = True
+        return game, ask(people.teo(game), "Let's go over the fuel together")
+
+    game, answer = theFuel(STORM_DAYS[0])
+    assert "it runs dry" in answer
+    assert game.state.knows(facts.TEOS_NIGHTS)
+
+    game, answer = theFuel(STORM_DAYS[0] + 1)
+    assert "it runs dry" not in answer
+    assert "That's what ran dry at three" in answer
+    assert game.state.knows(facts.TEOS_NIGHTS)
 
 
 def test_teo_has_nothing_to_say_about_the_storm_night_before_it_passes():

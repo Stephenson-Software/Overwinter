@@ -159,9 +159,9 @@ FACTS = {
         "text": "Marit signed Aksel off the manifest and carried his crates "
         "across before the ice went. Her plan for the station's gap was the "
         "old depot on the headland and the seals off the point, fetched once "
-        "the ice held. The ice held late this year and the storm is coming. "
-        "She says the sum still closes. She did not mean anyone to have to "
-        "check it.",
+        "the ice held. The ice held late this year, which left her no time "
+        "before the storm. She says the sum still closes. She did not mean "
+        "anyone to have to check it.",
         "leads": [
             {
                 "to": THE_DEPOT,
@@ -229,8 +229,8 @@ FACTS = {
         "title": "Teo's nights",
         "text": "Teo cannot sleep in the dark, so he runs the generator "
         "through the night for the lights, and has since the plane left. "
-        "The fuel margin Marit planned for the storm is gone. On the storm "
-        "nights the generator will run dry unless the night hours are cut.",
+        "The fuel margin Marit planned for the storm went on the lights. On "
+        "night hours like those, a storm runs the generator dry.",
     },
     THE_PLANE: {
         "title": "What the plane needs",

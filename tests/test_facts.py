@@ -1,4 +1,5 @@
 from overwinter import facts, premise
+from overwinter.scenes.galley import TABLE_TALK
 from overwinter.state import State
 
 
@@ -45,6 +46,21 @@ def test_the_premise_page_grows_with_what_is_known_and_says_the_ending():
         "(%d of %d parts" % (len(premise.PARAGRAPHS) - 2, len(premise.PARAGRAPHS))
         in full
     )
+
+
+def test_nothing_with_one_fixed_text_says_the_storm_is_still_to_come():
+    # These can be read or heard after the storm, and cannot branch on it.
+    fixed = [fact["text"] for fact in facts.FACTS.values()]
+    fixed += [paragraph for _, paragraph in premise.PARAGRAPHS]
+    fixed += list(TABLE_TALK)
+    for line in fixed:
+        for stale in (
+            "storm is coming",
+            "will run dry",
+            "will be weather",
+            "Marit can fix that",
+        ):
+            assert stale not in line, line
 
 
 def test_every_fact_is_needed_by_some_premise_paragraph():
