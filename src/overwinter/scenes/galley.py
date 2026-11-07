@@ -14,8 +14,8 @@ from overwinter.state import (
 # winter's fixed sequence, so a reloaded save hears the same supper.
 TABLE_TALK = (
     "Teo asks whether it is always this dark. Dov says yes. Marit says nothing.",
-    "Dov says the glass is falling and there will be weather by the end of "
-    "the week. Marit says she has seen the glass.",
+    "Dov reads out the glass at the table, as he does every night. Marit "
+    "says she has seen the glass.",
     "Teo says the snowmobile was warm the day he arrived, and then that he "
     "probably imagined it. Marit passes him the bread.",
     "Dov looks at the clock through the whole meal. At ten to ten he is gone.",

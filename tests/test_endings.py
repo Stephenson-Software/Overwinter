@@ -210,7 +210,7 @@ def test_half_rations_are_refused_before_marits_arithmetic_is_known(scripted):
     game, ui = scripted(script)
     game.play()
     assert flags.MARIT_APPROVED_HALF not in game.state.flags
-    assert ui.saw("Marit: No. Half rations in the second week")
+    assert ui.saw("Marit: No. Half rations on half a sum")
     # And the galley row is listed, greyed, with the reason.
     galleyMenus = [m for m in ui.menus if m[0].startswith("The galley")]
     reasons = galleyMenus[-1][2]

@@ -42,8 +42,24 @@ def storeDays(state):
     return "%d day%s" % (days, "" if days == 1 else "s")
 
 
+def stormHasCome(state):
+    """The storm is blowing or has blown, so a line can stop waiting for it."""
+    return state.stormy or state.stormNightPassed
+
+
 def marit(game):
     state = game.state
+
+    def howIsTheStation():
+        if stormHasCome(state):
+            return (
+                "Standing. The glass said weather and the glass was right. "
+                "Is the galley in order?"
+            )
+        return (
+            "Standing. The glass is falling; there will be weather by the "
+            "end of the week. Is the galley in order?"
+        )
 
     def aboutTheStore():
         return (
@@ -75,11 +91,16 @@ def marit(game):
             "The station's gap I meant to close myself: the '58 depot on the "
             "headland, once the ice held, and the seals off the point, which "
             "Aksel can get and I cannot. The ice held late this year and "
-            "there is a storm coming and I have not been across. The sum "
-            "still closes. I did not mean anyone to have to check it, and I "
-            "did not tell you because the one person who would have to "
-            "report it is Dov, and Dov reports things. (A pause.) So. Now "
-            "you know what I know. What are you going to do with it?"
+            "%s and I have not been across. The sum still closes. I did not "
+            "mean anyone to have to check it, and I did not tell you because "
+            "the one person who would have to report it is Dov, and Dov "
+            "reports things. (A pause.) So. Now you know what I know. What "
+            "are you going to do with it?"
+            % (
+                "then the storm came"
+                if stormHasCome(state)
+                else "there is a storm coming"
+            )
         )
 
     def undecidedAboutTheSecret():
@@ -114,9 +135,9 @@ def marit(game):
                 "mark, half rations - on Teo most. You will see it."
             )
         return (
-            "No. Half rations in the second week of a winter is how you get "
-            "a station that does not speak to each other by the fourth. "
-            "Count it again. Then we will talk."
+            "No. Half rations on half a sum is how you get a station that "
+            "does not speak to each other by the plane. Count it again. Then "
+            "we will talk."
         )
 
     def undecidedAboutTeo():
@@ -151,8 +172,7 @@ def marit(game):
         [
             {
                 "question": "How is the station looking?",
-                "response": "Standing. The glass is falling; there will be "
-                "weather by the end of the week. Is the galley in order?",
+                "response": howIsTheStation,
             },
             {
                 "question": "I've counted the store. %s." % storeDays(state),
@@ -396,6 +416,17 @@ def teo(game):
 
     def theFuel():
         game.learn(facts.TEOS_NIGHTS)
+        if state.stormNightPassed:
+            # Nobody knew in time, or he would have said this already, so the
+            # tank has run dry by now.
+            return (
+                "(He does not look at the gauge. He looks at the floor.) I "
+                "was running it all night. For the lights. Since the plane. "
+                "I couldn't - I lay there in the dark and I couldn't. "
+                "(Quickly:) It was only the night tank. It was only - (He "
+                "stops, because he has done the sum too.) That was the storm "
+                "margin. That's what ran dry at three. I know. I know."
+            )
         return (
             "(He does not look at the gauge. He looks at the floor.) I've "
             "been running it all night. For the lights. Since the plane. I "
