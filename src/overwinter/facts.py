@@ -160,8 +160,8 @@ FACTS = {
         "across before the ice went. Her plan for the station's gap was the "
         "old depot on the headland and the seals off the point, fetched once "
         "the ice held. The ice held late this year, which left her no time "
-        "before the storm. She says the sum still closes. She did not mean "
-        "anyone to have to check it.",
+        "before the storm. She meant the sum to close without anyone having "
+        "to check it.",
         "leads": [
             {
                 "to": THE_DEPOT,
@@ -227,9 +227,9 @@ FACTS = {
     },
     TEOS_NIGHTS: {
         "title": "Teo's nights",
-        "text": "Teo cannot sleep in the dark, so he runs the generator "
-        "through the night for the lights, and has since the plane left. "
-        "The fuel margin Marit planned for the storm went on the lights. On "
+        "text": "Teo cannot sleep in the dark. From the night the plane left "
+        "he ran the generator through the night for the lights, and the fuel "
+        "margin Marit planned for the storm went on them. On "
         "night hours like those, a storm runs the generator dry.",
     },
     THE_PLANE: {

@@ -7,7 +7,12 @@ from conftest import FakeGame, ScriptedUI
 from overwinter import facts, flags, premise
 from overwinter.scenes.bunks import Bunks
 from overwinter.scenes.epilogue import Epilogue
-from overwinter.scenes.galley import Galley
+from overwinter.scenes.galley import (
+    AKSEL_AT_THE_TABLE,
+    NOBODY_TALKS_ABOUT_THE_BAY,
+    TABLE_TALK,
+    Galley,
+)
 from overwinter.scenes.hut import Hut
 from overwinter.scenes.shed import Shed
 from overwinter.state import AKSEL_HUT, AKSEL_STATION, EVENING, MORNING, State
@@ -98,6 +103,34 @@ def test_a_first_count_with_aksel_at_the_table_divides_by_five():
     assert game.ui.saw("60 rations left, at 5 a day")
     assert game.ui.saw("You check the shelf twice. 12 days.")
     assert not game.ui.saw("Fifteen")
+
+
+def supperWith(akselAt):
+    game, galley = scene(Galley, ["Cook the meal"], "galley")
+    game.state.watch = EVENING
+    game.state.akselAt = akselAt
+    # Pin the draw to the one line that is only true without him.
+    drawn = []
+
+    def draw(choices):
+        drawn.append(choices)
+        return NOBODY_TALKS_ABOUT_THE_BAY
+
+    game.state.draw = draw
+    galley.run()
+    assert drawn == [TABLE_TALK]
+    return game.ui
+
+
+def test_nobody_keeps_quiet_about_the_bay_with_aksel_at_the_table():
+    ui = supperWith(AKSEL_HUT)
+    assert ui.saw("Nobody talks about the far side of the bay")
+
+    ui = supperWith(AKSEL_STATION)
+    assert not ui.saw("Nobody talks about the far side of the bay")
+    assert ui.saw(AKSEL_AT_THE_TABLE)
+    # The line is replaced after the draw, so the sequence keeps its shape.
+    assert NOBODY_TALKS_ABOUT_THE_BAY in TABLE_TALK
 
 
 def test_the_stores_journal_line_stays_true_after_the_store_is_eaten_into():
