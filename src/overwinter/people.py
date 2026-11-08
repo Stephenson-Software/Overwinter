@@ -91,15 +91,21 @@ def marit(game):
             "The station's gap I meant to close myself: the '58 depot on the "
             "headland, once the ice held, and the seals off the point, which "
             "Aksel can get and I cannot. The ice held late this year and "
-            "%s and I have not been across. The sum still closes. I did not "
-            "mean anyone to have to check it, and I did not tell you because "
-            "the one person who would have to report it is Dov, and Dov "
-            "reports things. (A pause.) So. Now you know what I know. What "
-            "are you going to do with it?"
+            "%s and I have not been across. %s I did not mean anyone to "
+            "have to check it, and I did not tell you because the one person "
+            "who would have to report it is Dov, and Dov reports things. (A "
+            "pause.) So. Now you know what I know. What are you going to do "
+            "with it?"
             % (
                 "then the storm came"
                 if stormHasCome(state)
-                else "there is a storm coming"
+                else "there is a storm coming",
+                # Once he has walked in, the store has been emptied once and
+                # the player has watched the sum fail; she does not deny it.
+                "The sum was meant to close. It did not, and he came in out "
+                "of the dark on the night it showed."
+                if state.flags.get(AKSEL_WALKED_IN)
+                else "The sum still closes.",
             )
         )
 
@@ -187,7 +193,11 @@ def marit(game):
                 and not state.knows(facts.THE_FIFTH),
             },
             {
-                "question": "I've been across the bay. I've met Aksel.",
+                "question": (
+                    "Aksel walked in out of the dark. You knew he was out there."
+                    if state.flags.get(AKSEL_WALKED_IN)
+                    else "I've been across the bay. I've met Aksel."
+                ),
                 "response": herArithmetic,
                 "condition": lambda: state.knows(facts.THE_FIFTH)
                 and not state.knows(facts.MARITS_ARITHMETIC),
@@ -465,6 +475,12 @@ def teo(game):
                 "hour. That's mine, that is - and you knew, and you let me "
                 "have the lights. I don't know what to do with that. I'd "
                 "have done it for you."
+            )
+        if state.knows(facts.TEOS_NIGHTS):
+            # He has already told you why; he does not pretend otherwise.
+            return (
+                "(Grey.) It ran dry at three. Night tank. You know why; I "
+                "told you. (He goes back to the engine.)"
             )
         return (
             "(Grey.) It ran dry at three. Night tank. Don't ask me why. "

@@ -125,6 +125,35 @@ def test_marits_arithmetic_says_the_storm_is_coming_only_before_it_comes():
         assert "then the storm came" in answer
 
 
+def test_after_the_walk_in_marit_is_not_told_you_crossed_the_bay():
+    game = FakeGame()
+    game.learn(facts.THE_FIFTH)
+    game.state.akselAt = AKSEL_STATION
+    game.state.flags[flags.AKSEL_WALKED_IN] = True
+    marit = people.marit(game)
+    assert "I've been across the bay. I've met Aksel." not in questions(marit)
+
+    answer = ask(marit, "Aksel walked in out of the dark")
+    assert game.state.knows(facts.MARITS_ARITHMETIC)
+    # The store has been emptied once; she does not say the sum closes.
+    assert "The sum still closes" not in answer
+    assert "It did not, and he came in out of the dark" in answer
+
+
+def test_marit_says_the_sum_closes_while_aksel_is_across_the_bay():
+    game = FakeGame()
+    game.learn(facts.THE_FIFTH)
+    answer = ask(people.marit(game), "I've been across the bay")
+    assert "The sum still closes" in answer
+
+
+def test_marits_arithmetic_and_teos_nights_hold_after_the_walk_in_and_the_key():
+    # Fixed texts, read on any day: neither claims the sum or the nights
+    # still stand.
+    assert "sum still closes" not in facts.FACTS[facts.MARITS_ARITHMETIC]["text"]
+    assert "has since the plane left" not in facts.FACTS[facts.TEOS_NIGHTS]["text"]
+
+
 def test_marit_and_dov_speak_about_the_storm_night_only_if_the_tank_ran_dry():
     game = FakeGame()
     marit, dov = people.marit(game), people.dov(game)
@@ -171,6 +200,18 @@ def test_teo_speaks_about_the_storm_night_by_what_was_done_about_his_nights():
     assert "You told her" in teoAfterTheStorm(flags.TOLD_MARIT_ABOUT_TEO)
     assert "you let me have the lights" in teoAfterTheStorm(flags.COVERED_FOR_TEO)
     assert "Don't ask me why" in teoAfterTheStorm()
+
+
+def test_teo_does_not_hold_back_why_once_he_has_told_you():
+    game = FakeGame()
+    afterTheStormNight(game)
+    game.state.flags[flags.MET_TEO] = True
+    teo = people.teo(game)
+    ask(teo, "Let's go over the fuel together")
+
+    answer = ask(teo, "About the storm night")
+    assert "Don't ask me why" not in answer
+    assert "You know why; I told you" in answer
 
 
 def test_teo_warns_of_the_tank_until_the_storm_night_and_owns_it_after():

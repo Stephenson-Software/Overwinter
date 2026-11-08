@@ -10,6 +10,18 @@ from overwinter.state import (
     STATION_MOUTHS,
 )
 
+# The one supper line that is only true while Aksel is across the bay.
+NOBODY_TALKS_ABOUT_THE_BAY = (
+    "Nobody talks about the far side of the bay. Nobody has, since you came."
+)
+# What is said instead with him at the table. It replaces the line after the
+# draw, so TABLE_TALK keeps its length and order and a reloaded save hears the
+# same suppers.
+AKSEL_AT_THE_TABLE = (
+    "Aksel eats slowly and says the bread is better than his was. Nobody "
+    "says anything about the hut across the bay."
+)
+
 # What gets said at the table, in no order anyone chose. Drawn from the
 # winter's fixed sequence, so a reloaded save hears the same supper.
 TABLE_TALK = (
@@ -25,7 +37,7 @@ TABLE_TALK = (
     "nobody stops him.",
     "Dov says Base asked after the station's stores today, as they do every "
     "week, and he told them what the manifest says.",
-    "Nobody talks about the far side of the bay. Nobody has, since you came.",
+    NOBODY_TALKS_ABOUT_THE_BAY,
 )
 
 
@@ -79,7 +91,7 @@ class Galley(Scene):
             return self.after()
         elif kind == "cook":
             self.ui.showDialogue(
-                "You cook. " + state.draw(TABLE_TALK)
+                "You cook. " + self.tableTalk()
                 if state.watch == EVENING
                 else "You cook. The others eat where they work, and the "
                 "plates come back."
@@ -96,6 +108,14 @@ class Galley(Scene):
             state.flags[HALF_RATIONS] = False
             self.ui.showDialogue("Full rations again. Teo says thank you to his plate.")
         return self.spend(1)
+
+    def tableTalk(self):
+        """One supper's talk, from the fixed sequence, as it is with the
+        people actually at the table."""
+        line = self.state.draw(TABLE_TALK)
+        if line == NOBODY_TALKS_ABOUT_THE_BAY and self.state.akselAt == AKSEL_STATION:
+            return AKSEL_AT_THE_TABLE
+        return line
 
     def count(self):
         first = self.game.learn(facts.THE_STORE)
