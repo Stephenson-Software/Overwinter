@@ -116,9 +116,9 @@ PARAGRAPHS = [
     ),
     (
         (facts.TEOS_NIGHTS,),
-        "THE OTHER COUNT. Teo has been running the generator all night "
-        "because he cannot sleep in the dark, and the storm margin of fuel "
-        "went on it. Only Marit could cut the night hours, and Teo would "
+        "THE OTHER COUNT. Teo ran the generator all night from the night "
+        "the plane left, because he cannot sleep in the dark, and the storm "
+        "margin of fuel went on it. Only Marit could cut the night hours, and Teo would "
         "know who told her.",
     ),
     (

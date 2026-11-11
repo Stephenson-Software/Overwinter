@@ -59,6 +59,7 @@ def test_nothing_with_one_fixed_text_says_the_storm_is_still_to_come():
             "will run dry",
             "will be weather",
             "Marit can fix that",
+            "has been running",
         ):
             assert stale not in line, line
 
