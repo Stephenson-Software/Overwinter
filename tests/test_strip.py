@@ -2,11 +2,13 @@ from conftest import FakeGame, ScriptedUI
 
 from overwinter import facts, flags, progression
 from overwinter.scenes.base import STORM_REASON
+from overwinter.scenes.office import LOG_ENTRIES
 from overwinter.scenes.strip import HUNT_DRAWS, Strip
 from overwinter.state import (
     AKSEL_FLOWN,
     AKSEL_HUT,
     AKSEL_STATION,
+    DEPOT_FOOD,
     ICE_SAFE_DAY,
     STORM_DAYS,
     State,
@@ -93,6 +95,19 @@ def test_an_emptied_depot_is_greyed_with_the_reason():
     game.state.flags[flags.DEPOT_FETCHED] = True
     scene.run()
     assert reasons(game.ui)[DEPOT] == "you've emptied it"
+
+
+def test_the_depot_as_laid_is_twice_what_comes_back_once_half_is_left():
+    # Two dozen tins, half swollen and left behind, DEPOT_FOOD rations home:
+    # the log and the fact must say it was laid for twice that at one man.
+    laid = {24: "twenty-four"}[2 * DEPOT_FOOD] + " days at one man"
+    assert laid in LOG_ENTRIES[0][2]
+    assert laid in facts.FACTS[facts.THE_DEPOT]["text"]
+
+    game, scene = everything([DEPOT, "Quit"])
+    scene.run()
+    assert game.ui.saw("two dozen tins. Half are swollen")
+    assert game.ui.saw("%d rations" % DEPOT_FOOD)
 
 
 def test_the_holes_need_aksel_on_the_island_and_take_one_wait_a_day():

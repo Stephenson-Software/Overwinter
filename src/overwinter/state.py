@@ -46,7 +46,7 @@ START_FOOD = 15 * STATION_MOUTHS
 MANIFEST_FOOD = 21 * STATION_MOUTHS
 # Four crates of six rations went across the bay with Aksel.
 AKSEL_CRATES = 24
-# The 1958 depot: twelve days at one man, of which half has gone.
+# The 1958 depot: twenty-four days at one man, of which half has gone.
 DEPOT_FOOD = 12
 # One seal feeds the station for two days.
 SEAL_FOOD = 8
