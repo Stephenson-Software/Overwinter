@@ -179,7 +179,7 @@ FACTS = {
         "title": "The 1958 depot",
         "text": "From the log, 1958: an emergency depot laid in a stone cairn "
         "on the headland - pemmican and hard bread in sealed tins, 'for "
-        "twelve days at one man'. Nobody has opened it since. It is an "
+        "twenty-four days at one man'. Nobody has opened it since. It is an "
         "afternoon's walk. Some of it will have gone.",
     },
     THE_SEALS: {
