@@ -11,7 +11,7 @@ LOG_ENTRIES = [
         facts.THE_DEPOT,
         "1958, October. 'Emergency depot laid this day in a stone cairn on "
         "the headland, one mile north of the strip: pemmican and hard bread "
-        "in sealed tins, for twelve days at one man. To be inspected each "
+        "in sealed tins, for twenty-four days at one man. To be inspected each "
         "season.' Below it, in eight different hands over fifty years: "
         "'Inspected. Cairn sound.' Nobody has written that they opened it.",
     ),
