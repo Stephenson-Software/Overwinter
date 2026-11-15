@@ -15,7 +15,17 @@ from overwinter.scenes.galley import (
 )
 from overwinter.scenes.hut import Hut
 from overwinter.scenes.shed import Shed
-from overwinter.state import AKSEL_HUT, AKSEL_STATION, EVENING, MORNING, State
+from overwinter.state import (
+    AKSEL_HUT,
+    AKSEL_STATION,
+    EVENING,
+    ICE_SAFE_DAY,
+    MORNING,
+    START_FOOD,
+    STATION_MOUTHS,
+    State,
+)
+from overwinter.winter import DAY_LINES
 from test_game import SLEEP, TURN_IN
 
 
@@ -131,6 +141,39 @@ def test_nobody_keeps_quiet_about_the_bay_with_aksel_at_the_table():
     assert ui.saw(AKSEL_AT_THE_TABLE)
     # The line is replaced after the draw, so the sequence keeps its shape.
     assert NOBODY_TALKS_ABOUT_THE_BAY in TABLE_TALK
+
+
+def test_aksel_is_only_at_the_galley_table_once_he_is_at_the_station():
+    game, galley = scene(Galley, ["Quit"], "galley")
+    assert galley.run() == "quit"
+    assert "Talk to Aksel" not in game.ui.menus[-1][1]
+
+
+def test_talking_to_aksel_at_the_galley_table_costs_no_watch():
+    game, galley = scene(
+        Galley, ["Talk to Aksel", "How are you finding the galley", "[Back]"], "galley"
+    )
+    game.state.akselAt = AKSEL_STATION
+    assert galley.run() == "galley"
+    assert game.ui.saw("Your galley. I am not going to tell you how to run it.")
+    # Talking is free, at the table as everywhere else.
+    assert game.state.watch == MORNING
+    assert game.state.day == 1
+    assert not game.ui.script
+
+
+def test_an_evening_spent_in_the_galley_shows_what_the_night_brought():
+    game, galley = scene(Galley, ["Cook the meal"], "galley")
+    game.state.day = ICE_SAFE_DAY - 1
+    game.state.watch = EVENING
+    assert galley.run() == "galley"
+    # The night came in the galley, not the bunkroom: the day still turns,
+    # the store is still eaten, and the morning's line is still shown.
+    assert game.state.day == ICE_SAFE_DAY
+    assert game.state.watch == MORNING
+    assert game.state.food == START_FOOD - STATION_MOUTHS
+    assert game.ui.dialogues[-1] == DAY_LINES[ICE_SAFE_DAY]
+    assert game.state.location == "galley"
 
 
 def test_the_stores_journal_line_stays_true_after_the_store_is_eaten_into():
