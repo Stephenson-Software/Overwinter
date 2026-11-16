@@ -14,6 +14,7 @@ from overwinter.scenes.galley import (
     Galley,
 )
 from overwinter.scenes.hut import Hut
+from overwinter.scenes.office import Office
 from overwinter.scenes.shed import Shed
 from overwinter.state import (
     AKSEL_HUT,
@@ -201,6 +202,15 @@ def test_the_hut_after_aksel_has_come_in_is_cold_and_has_nobody_to_talk_to():
     assert "Talk to Aksel" not in game.ui.menus[-1][1]
     assert "the crates are gone" in game.ui.menus[-1][0]
     assert game.ui.saw("Nothing left in it that was not here in 1961.")
+
+
+def test_opening_the_station_log_and_closing_it_unread_costs_nothing():
+    game, office = scene(Office, ["Read the station log", "Close the log"], "office")
+    assert office.run() == "office"
+    assert "Close the log" in game.ui.menus[-1][1]
+    assert game.state.facts == []
+    assert game.state.watch == MORNING
+    assert game.state.day == 1
 
 
 def test_the_epilogue_rereads_the_last_page_and_opens_the_journal_for_free():
