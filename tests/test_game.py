@@ -228,6 +228,47 @@ def test_a_damaged_save_is_kept_aside_and_a_fresh_winter_starts(scripted, tmp_pa
     assert game2.state.day == 1
 
 
+def test_a_damaged_save_that_cannot_be_copied_aside_says_so(scripted, monkeypatch):
+    from overwinter import game as gameModule
+
+    game, ui = scripted(["Create New Save", "Quit"])
+    game.play()
+    path = game.saveFileManager.get_save_path("save.json")
+    with open(path, "w") as f:
+        f.write('{"version": 1, "day": "seven"}')
+
+    def refuse(source, destination):
+        raise OSError("read-only")
+
+    monkeypatch.setattr(gameModule.shutil, "copy2", refuse)
+    game2, ui2 = scripted(["Load Slot 1", "Quit"])
+    game2.play()
+    assert ui2.saw("This save could not be read")
+    assert ui2.saw("It could not be copied aside.")
+    assert not ui2.saw("A copy was kept at")
+    assert not [n for n in os.listdir(os.path.dirname(path)) if "damaged" in n]
+    assert game2.state.day == 1
+
+
+def test_a_save_in_a_place_the_game_no_longer_has_resumes_in_the_galley(scripted):
+    game, ui = scripted(["Create New Save", "Count the store", "Quit"])
+    game.play()
+    path = game.saveFileManager.get_save_path("save.json")
+    with open(path) as f:
+        data = json.load(f)
+    data["location"] = "the_old_radio_mast"
+    with open(path, "w") as f:
+        json.dump(data, f)
+
+    game2, ui2 = scripted(["Load Slot 1", "Quit"])
+    game2.play()
+    assert not game2.failedLoad
+    assert game2.state.location == "galley"
+    assert game2.state.knows(facts.THE_STORE)
+    # The first menu after the slot menu is the galley's.
+    assert "Count the store" in ui2.menus[1][1]
+
+
 def test_letting_aksel_go_is_an_ending_of_its_own(scripted):
     script = list(FULL_RUN)
     script[script.index("He's coming with us")] = "Let him go"
