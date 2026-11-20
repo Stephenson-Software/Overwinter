@@ -4,7 +4,7 @@ FakeGame, so the time they cost and what they say are pinned down."""
 
 from conftest import FakeGame, ScriptedUI
 
-from overwinter import facts, flags, premise
+from overwinter import facts, flags, premise, progression
 from overwinter.scenes.bunks import Bunks
 from overwinter.scenes.epilogue import Epilogue
 from overwinter.scenes.galley import (
@@ -15,6 +15,7 @@ from overwinter.scenes.galley import (
 )
 from overwinter.scenes.hut import Hut
 from overwinter.scenes.office import Office
+from overwinter.scenes.radio import Radio
 from overwinter.scenes.shed import Shed
 from overwinter.state import (
     AKSEL_HUT,
@@ -45,6 +46,49 @@ def test_teo_is_only_there_to_sit_up_with_in_the_evening():
     game, bunks = scene(Bunks, ["Quit"], "bunks")
     assert bunks.run() == "quit"
     assert reasonFor(game.ui, "Sit up with Teo") == "he's out at the shed till evening"
+
+
+def test_the_journal_is_greyed_until_there_is_something_to_write():
+    game, bunks = scene(Bunks, ["Quit", "Quit"], "bunks")
+    assert bunks.run() == "quit"
+    assert reasonFor(game.ui, "Open your journal") == "nothing to write yet"
+
+    game.state.learn(facts.THE_STORE)
+    progression.catchUp(game.state)
+    assert bunks.run() == "quit"
+    assert reasonFor(game.ui, "Open your journal") is None
+
+
+def test_the_schedule_is_only_there_to_sit_in_on_in_the_evening():
+    game, radio = scene(Radio, ["Quit"], "radio")
+    assert radio.run() == "quit"
+    assert (
+        reasonFor(game.ui, "Sit in on the evening schedule")
+        == "the schedule goes out on the evening watch"
+    )
+
+
+def test_sitting_in_on_the_schedule_twice_learns_dovs_game_once():
+    game, radio = scene(
+        Radio,
+        ["Sit in on the evening schedule", "Sit in on the evening schedule"],
+        "radio",
+    )
+    game.state.watch = EVENING
+    assert radio.run() == "radio"
+    assert game.state.knows(facts.DOVS_GAME)
+    assert game.ui.saw("It is not chess.")
+    # The evening was the last watch: the night came and the day turned.
+    assert game.state.day == 2
+    assert game.state.watch == MORNING
+
+    game.state.watch = EVENING
+    assert radio.run() == "radio"
+    assert game.ui.dialogues[-1].startswith("The weather at twenty hundred")
+    assert game.ui.saw("You do not ask. He does not offer.")
+    assert game.state.facts == [facts.DOVS_GAME]
+    assert game.state.learnedOn(facts.DOVS_GAME) == 1
+    assert game.state.day == 3
 
 
 def test_sitting_up_with_teo_meets_him_and_spends_the_evening():
